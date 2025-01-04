@@ -8,12 +8,6 @@
         :posts="posts"
         />
         
-        
-    
-        
-       
-
-        
     </div>
 
 </template>
