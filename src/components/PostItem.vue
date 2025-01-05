@@ -5,23 +5,20 @@
         <div><strong>Описание</strong> {{ post.body }}</div>
     </div>
     <div class="post__btns">
-        <button>Удалить</button>
+        <my-button>Удалить</my-button>
     </div>
 
     </div>
-
-  
-
-
 
 
 </template>
 
 
-
-
 <script>
+
 export default {
+  
+
     props: {
         post: {
             type: Object,
