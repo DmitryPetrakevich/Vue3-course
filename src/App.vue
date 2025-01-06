@@ -24,7 +24,7 @@
        
         
         <post-list 
-        :posts="posts"
+        :posts="sortedPosts"
         @remove="removePost"
         v-if="!isPostsLoading"
         />
@@ -87,6 +87,17 @@ export default {
 
     mounted() {
         this.fetchPosts();
+    },
+
+    computed: {
+        sortedPosts() {
+            return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
+        }
+
+        },
+
+    watch: {
+    
     }
 }
 
