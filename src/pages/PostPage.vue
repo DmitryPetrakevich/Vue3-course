@@ -2,6 +2,7 @@
     <div>
         <h1>Страница с постами</h1>
         <my-input
+        v-focus
         v-model="searchQuery"
         placeholder="Поиск ..."
 
@@ -140,19 +141,19 @@ export default {
     mounted() {
         this.fetchPosts();
         console.log(this.$refs.observer);
-        const options = {
-            rootMargin: "0px",
-            threshold: 1.0
-        }
+        // const options = {
+        //     rootMargin: "0px",
+        //     threshold: 1.0
+        // }
 
-        const callback = (entries,observer) => {
-            if(entries[0].isIntersecting && this.page < this.totalPages) {
-                this.loadMorePosts()
-            }
-        };
+        // const callback = (entries,observer) => {
+        //     if(entries[0].isIntersecting && this.page < this.totalPages) {
+        //         this.loadMorePosts()
+        //     }
+        // };
 
-        const observer = new IntersectionObserver(callback, options);
-        observer.observe(this.$refs.observer);
+        // const observer = new IntersectionObserver(callback, options);
+        // observer.observe(this.$refs.observer);
 
     },
 
