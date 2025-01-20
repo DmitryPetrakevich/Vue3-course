@@ -35,7 +35,7 @@
         v-if="!isPostsLoading"
         />
         <div v-else >Идет загрузка ...</div>
-        <div ref="observer" class="observer"></div>
+        <div v-intersection="loadMorePosts" class="observer"></div>
         <!-- <div class="page__wrapper">
             <div
             v-for="pageNumber in totalPages"
