@@ -3,7 +3,7 @@
         <h1>{{ likes }}</h1>
         <my-button @click="addLike">Like</my-button>
         <h1>Страница с постами</h1>
-        <!-- <my-input
+        <my-input
         v-focus
         v-model="searchQuery"
         placeholder="Поиск ..."
@@ -11,7 +11,7 @@
         />
         <div class="app__btns">
         <my-button
-        @click="showDialog"
+        
         >
             Создать пост
         </my-button>
@@ -26,18 +26,18 @@
        
         <my-dialog v-model:show="dialogVisible">
             <post-form
-            @create="createPost"
+            
             />
         </my-dialog>
        
         
         <post-list 
         :posts="sortedAndSearchedPosts"
-        @remove="removePost"
+        
         v-if="!isPostsLoading"
         />
         <div v-else >Идет загрузка ...</div>
-        <div v-intersection="loadMorePosts" class="observer"></div> -->
+        
     </div>
 
 </template>
@@ -46,8 +46,10 @@
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
 import axios from "axios";
-import {ref} from "vue"
-
+import {ref} from "vue";
+import {usePosts} from "@/hooks/usePosts";
+import useSortedPosts from "@/hooks/useSortedPosts";
+import useSortedAndSearchedPosts from "@/hooks/useSortedAndSearchedPosts"
 export default {
     components: {
         PostForm, PostList
@@ -64,17 +66,22 @@ export default {
         }
     },
     setup(props) {
-        const likes = ref(0)
-        const addLike = () => {
-            likes.value += 1
-        }
+        const {posts, isPostsLoading, totalPages} = usePosts(10)
+        const {sortedPosts, selectedSort} = useSortedPosts(posts)
+        const {searchQuery, sortedAndSearchedPosts} = useSortedAndSearchedPosts(sortedPosts)
 
         return {
-            likes,
-            addLike
+            posts,
+            totalPages,
+            isPostsLoading,
+            sortedPosts,
+            selectedSort,
+            searchQuery,
+            sortedAndSearchedPosts
         }
+
+        }   
     }
-}
 
 
 </script>

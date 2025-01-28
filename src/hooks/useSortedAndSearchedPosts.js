@@ -1,13 +1,15 @@
-import {computed, ref} from "vue"
+import { computed, ref } from "vue";
 
-export default function userSortedPosts(sortedPosts) {
-    const searchQuery = ref('')
-    const sortedAndSearchedPosts = computed(() => {
-        return [...posts.value].sort((post1, post2) => post1[selectedSort.value]?.localeCompare(post2[selectedSort.value]))
-    })
+export default function useSortedAndSearchedPosts(sortedPosts) {
+  const searchQuery = ref("");
+  const sortedAndSearchedPosts = computed(() => {
+    return sortedPosts.value.filter((post) =>
+      post.title.toLowerCase().includes(searchQuery.value.toLowerCase())
+    );
+  });
 
-    return {
-        searchQuery, sortedAndSearchedPosts
-    }
-
-};
+  return {
+    searchQuery,
+    sortedAndSearchedPosts,
+  };
+}
